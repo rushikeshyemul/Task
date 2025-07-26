@@ -8,8 +8,8 @@ load_dotenv()
 
 # Get GROQ API credentials from environment
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
-GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions"
-GROQ_MODEL = "llama3-70b-8192"
+GROQ_API_URL = os.getenv("GROQ_API_URL")
+GROQ_MODEL = os.getenv("GROQ_MODEL")
 
 # Function to get response from Groq LLM
 async def get_llm_response(messages):
