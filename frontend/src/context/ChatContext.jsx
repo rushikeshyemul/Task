@@ -6,6 +6,39 @@ export const ChatProvider = ({ children }) => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
+  const [sessions, setSessions] = useState([]);
+  const [activeSession, setActiveSession] = useState(null);
+
+  const startNewSession = () => {
+    const sessionId = Date.now();
+    const newSession = { id: sessionId, messages: [] };
+    setSessions((prev) => [newSession, ...prev]);
+    setMessages([]);
+    setActiveSession(sessionId);
+  };
+
+  const loadSession = (sessionId) => {
+    const session = sessions.find((s) => s.id === sessionId);
+    if (session) {
+      setMessages(session.messages);
+      setActiveSession(sessionId);
+    }
+  };
+
+  const sendMessage = (message) => {
+    setMessages((prev) => {
+      const updated = [...prev, message];
+
+      // Save to current session
+      setSessions((prevSessions) =>
+        prevSessions.map((s) =>
+          s.id === activeSession ? { ...s, messages: updated } : s
+        )
+      );
+
+      return updated;
+    });
+  };
 
   return (
     <ChatContext.Provider
@@ -16,6 +49,11 @@ export const ChatProvider = ({ children }) => {
         setInput,
         loading,
         setLoading,
+        sendMessage,
+        sessions,
+        startNewSession,
+        loadSession,
+        activeSession,
       }}
     >
       {children}
@@ -23,10 +61,5 @@ export const ChatProvider = ({ children }) => {
   );
 };
 
-// Custom hook
-export const useChat = () => {
-  const context = useContext(ChatContext);
-  if (!context) throw new Error("useChat must be used within ChatProvider");
-  return context;
-};
-export { ChatContext };
+export const useChat = () => useContext(ChatContext);
+export default ChatContext;

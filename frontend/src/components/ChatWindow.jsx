@@ -1,19 +1,20 @@
-// components/ChatWindow.jsx
 import React from "react";
 import { useChat } from "../context/ChatContext";
+import MessageList from "./MessageList";
+import UserInput from "./UserInput";
+import ConversationHistory from "./ConversationHistory";
 import "./ChatWindow.css";
 
 const ChatWindow = () => {
-  const { messages, loading } = useChat();
+  const { messages } = useChat();
 
   return (
     <div className="chat-window">
-      {messages.map((msg, index) => (
-        <div key={index} className={`message ${msg.sender}`}>
-          <strong>{msg.sender === "user" ? "You" : "AI"}:</strong> {msg.text}
-        </div>
-      ))}
-      {loading && <div className="message ai">AI is typing...</div>}
+      <ConversationHistory />
+      <div className="chat-main">
+        <MessageList messages={messages} />
+        <UserInput />
+      </div>
     </div>
   );
 };
