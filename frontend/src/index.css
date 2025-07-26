@@ -1,58 +1,13 @@
-.app-container {
-  display: flex;
-  justify-content: center;
-  padding: 20px;
+/* App.css or index.css */
+.app {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem;
   font-family: Arial, sans-serif;
 }
-
-.chat-window {
-  width: 400px;
-  border: 1px solid #ddd;
-  padding: 15px;
-  border-radius: 8px;
-  background: #f9f9f9;
-}
-
 .message-list {
-  height: 300px;
-  overflow-y: auto;
-  margin-bottom: 10px;
-}
-
-.message {
-  padding: 8px 12px;
-  border-radius: 10px;
-  margin: 5px 0;
-  max-width: 80%;
-}
-
-.user {
-  background-color: #d1e7dd;
-  align-self: flex-end;
-  text-align: right;
-}
-
-.ai {
-  background-color: #f8d7da;
-  align-self: flex-start;
-}
-
-.user-input {
-  display: flex;
-  gap: 10px;
-}
-
-.user-input input {
   flex: 1;
-  padding: 8px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-}
-
-.user-input button {
-  padding: 8px 12px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
+  padding: 1rem;
+  overflow-y: auto;
+  border-bottom: 1px solid #ddd;
 }
