@@ -3,6 +3,13 @@
 from pydantic import BaseModel, Field
 from typing import List
 from datetime import datetime
+from typing import Optional
+
+class ChatMessage(BaseModel):
+    user_id: str
+    message: str
+    conversation_id: Optional[str] = None
+    timestamp: datetime = Field(default_factory=datetime.utcnow)
 
 class Message(BaseModel):
     role: str  # 'user' or 'ai'
