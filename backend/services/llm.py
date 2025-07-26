@@ -7,25 +7,25 @@ import asyncio
 load_dotenv()
 
 # Get GROQ API credentials from environment
-GROQ_API_KEY = os.getenv("GROQ_API_KEY")
-GROQ_API_URL = os.getenv("GROQ_API_URL")
-GROQ_MODEL = os.getenv("GROQ_MODEL")
+api_key  = os.getenv("GROQ_API_KEY")
+url = os.getenv("GROQ_API_URL")
+model  = os.getenv("GROQ_MODEL")
 
 # Function to get response from Groq LLM
 async def get_llm_response(messages):
     headers = {
-        "Authorization": f"Bearer {GROQ_API_KEY}",
+        "Authorization": f"Bearer {api_key}",
         "Content-Type": "application/json"
     }
 
     payload = {
-        "model": GROQ_MODEL,
+        "model": model,
         "messages": messages,
         "temperature": 0.7
     }
 
     async with httpx.AsyncClient() as client:
-        response = await client.post(GROQ_API_URL, headers=headers, json=payload)
+        response = await client.post(url, headers=headers, json=payload)
         print("Status Code:", response.status_code)
         print("Response:", response.text)
         response.raise_for_status()  # Will raise error for non-2xx codes
